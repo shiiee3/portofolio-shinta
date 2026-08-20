@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - Shinta Kumala Rahmadanthi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Fredoka & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        pink: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bg-polkadot {
+            background-color: #fff5f7;
+            background-image: radial-gradient(#f472b6 2.2px, transparent 2.2px), radial-gradient(#f472b6 2.2px, #fff5f7 2.2px);
+            background-size: 28px 28px;
+            background-position: 0 0, 14px 14px;
+        }
+        .bg-polkadot-subtle {
+            background-color: #ffffff;
+            background-image: radial-gradient(#fbcfe8 1.8px, transparent 1.8px);
+            background-size: 22px 22px;
+        }
+        .bg-polkadot-dark {
+            background-color: #be123c;
+            background-image: radial-gradient(#fda4af 2px, transparent 2px);
+            background-size: 24px 24px;
+        }
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+            animation: fadeIn 0.35s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .polka-badge {
+            box-shadow: 0 4px 14px 0 rgba(244, 63, 94, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-sans selection:bg-pink-300 selection:text-pink-900">
+
+    <!-- 1. HEADER & NAVBAR MODULAR -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-pink-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand / Logo -->
+                <a href="#beranda" onclick="navigateTo('beranda')" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-pink-500 via-rose-400 to-pink-300 flex items-center justify-center text-white font-heading font-bold text-xl shadow-md group-hover:rotate-6 transition-transform border-2 border-white">
+                        SK
+                    </div>
+                    <div>
+                        <span class="font-heading font-extrabold text-xl text-pink-700 tracking-tight block leading-tight group-hover:text-pink-600 transition">Portofolio Shinta</span>
+                        <span class="text-xs text-pink-500 font-semibold tracking-wide">Shinta Kumala Rahmadanthi</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden lg:flex items-center gap-1 font-semibold text-sm">
+                    <button onclick="navigateTo('beranda')" id="nav-beranda" class="nav-btn px-3.5 py-2 rounded-xl text-slate-600 hover:text-pink-600 hover:bg-pink-50 transition flex items-center gap-2">
+                        <span>🏠</span> Beranda
+                    </button>
+                    <button onclick="navigateTo('tentang')" id="nav-tentang" class="nav-btn px-3.5 py-2 rounded-xl text-slate-600 hover:text-pink-600 hover:bg-pink-50 transition flex items-center gap-2">
+                        <span>👤</span> Tentang Saya
+                    </button>
+                    <button onclick="navigateTo('jaringan')" id="nav-jaringan" class="nav-btn px-3.5 py-2 rounded-xl text-slate-600 hover:text-pink-600 hover:bg-pink-50 transition flex items-center gap-2">
+                        <span>🌐</span> Jaringan Komputer
+                    </button>
+                    <button onclick="navigateTo('iot')" id="nav-iot" class="nav-btn px-3.5 py-2 rounded-xl text-slate-600 hover:text-pink-600 hover:bg-pink-50 transition flex items-center gap-2">
+                        <span>🤖</span> IoT & Arduino
+                    </button>
+                    <button onclick="navigateTo('karya')" id="nav-karya" class="nav-btn px-3.5 py-2 rounded-xl text-slate-600 hover:text-pink-600 hover:bg-pink-50 transition flex items-center gap-2">
+                        <span>💡</span> Galeri Proyek
+                    </button>
+                    <button onclick="navigateTo('kontak')" id="nav-kontak" class="nav-btn px-3.5 py-2 rounded-xl text-slate-600 hover:text-pink-600 hover:bg-pink-50 transition flex items-center gap-2">
+                        <span>📬</span> Kontak
+                    </button>
+                </nav>
+
+                <!-- Mobile Menu Toggle Button -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl text-pink-600 bg-pink-50 hover:bg-pink-100 transition">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Dropdown Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden border-b-2 border-pink-200 bg-white px-4 pt-2 pb-4 space-y-1.5 shadow-lg">
+            <button onclick="navigateTo('beranda'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-pink-50 hover:text-pink-600 font-semibold flex items-center gap-3">
+                <span class="text-lg">🏠</span> Beranda (index.html)
+            </button>
+            <button onclick="navigateTo('tentang'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-pink-50 hover:text-pink-600 font-semibold flex items-center gap-3">
+                <span class="text-lg">👤</span> Tentang Saya (pages/tentang.html)
+            </button>
+            <button onclick="navigateTo('jaringan'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-pink-50 hover:text-pink-600 font-semibold flex items-center gap-3">
+                <span class="text-lg">🌐</span> Jaringan Komputer (pages/jaringan.html)
+            </button>
+            <button onclick="navigateTo('iot'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-pink-50 hover:text-pink-600 font-semibold flex items-center gap-3">
+                <span class="text-lg">🤖</span> IoT & Arduino (pages/iot-arduino.html)
+            </button>
+            <button onclick="navigateTo('karya'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-pink-50 hover:text-pink-600 font-semibold flex items-center gap-3">
+                <span class="text-lg">💡</span> Galeri Proyek (pages/karya-proyek.html)
+            </button>
+            <button onclick="navigateTo('kontak'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-pink-50 hover:text-pink-600 font-semibold flex items-center gap-3">
+                <span class="text-lg">📬</span> Kontak (pages/kontak.html)
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow">
+
+        <!-- 2. HALAMAN UTAMA / BERANDA (index.html) -->
+        <section id="page-beranda" class="page-section active">
+            <!-- Hero Section with Pink Polkadot Background -->
+            <div class="relative overflow-hidden bg-polkadot py-16 sm:py-24 border-b-2 border-pink-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        
+                        <!-- Profile Image Container (assets/img/profil.jpg fallback to placeholder) -->
+                        <div class="lg:col-span-5 flex justify-center order-first lg:order-last">
+                            <div class="relative group">
+                                <div class="absolute -inset-2 bg-gradient-to-r from-pink-400 to-rose-400 rounded-3xl blur opacity-60 group-hover:opacity-90 transition duration-300"></div>
+                                <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl overflow-hidden border-4 border-white shadow-2xl bg-pink-100">
+                                    <img src="imut.jpg" 
+                                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600';" 
+                                         alt="Foto Profil Shinta Kumala Rahmadanthi" 
+                                         class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                </div>
+                                <div class="absolute -bottom-4 -right-2 bg-white py-2 px-4 rounded-full shadow-lg border-2 border-pink-300 flex items-center gap-2 polka-badge">
+                                    <span class="w-3 h-3 rounded-full bg-pink-500 animate-pulse"></span>
+                                    <span class="text-xs font-bold text-pink-700">Kelas XII RPL</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hero Greeting Text & CTA -->
+                        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border-2 border-pink-300 text-pink-700 text-xs font-bold uppercase tracking-wider shadow-sm">
+                                <i class="fa-solid fa-heart text-pink-500"></i> Portofolio Siswa Rekayasa Perangkat Lunak
+                            </div>
+                            <h1 class="text-3xl sm:text-5xl font-heading font-extrabold text-slate-900 tracking-tight leading-tight">
+                                Halo, Saya <br><span class="bg-gradient-to-r from-pink-600 via-rose-500 to-pink-500 bg-clip-text text-transparent">Shinta Kumala Rahmadanthi</span>
+                            </h1>
+                            <div class="p-4 rounded-2xl bg-white/90 border border-pink-200 shadow-sm inline-block text-left">
+                                <p class="text-pink-700 font-extrabold text-base sm:text-lg flex items-center gap-2">
+                                    <i class="fa-solid fa-graduation-cap text-pink-500"></i> Siswa Kelas XII - Peminatan Rekayasa Perangkat Lunak / Informatika
+                                </p>
+                            </div>
+                            <p class="text-slate-600 max-w-2xl text-base leading-relaxed">
+                                Selamat datang di portofolio digital saya! Di sini Anda dapat melihat pemograman web, eksplorasi jaringan komputer dasar, serta proyek mikrokontroler Internet of Things (IoT).
+                            </p>
+                            
+                            <!-- Call-to-Action Buttons -->
+                            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                                <button onclick="navigateTo('karya')" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold shadow-lg shadow-pink-500/30 transition hover:-translate-y-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-folder-open"></i> Lihat Proyek Saya
+                                </button>
+                                <button onclick="navigateTo('kontak')" class="px-7 py-3.5 rounded-2xl bg-white hover:bg-pink-50 text-pink-700 border-2 border-pink-300 font-bold shadow-sm transition hover:-translate-y-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-paper-plane text-pink-500"></i> Hubungi Saya
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ringkasan Keahlian (Skills Summary) -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-xs font-bold text-pink-600 tracking-widest uppercase bg-pink-100 px-3 py-1 rounded-full">Keahlian Utama</span>
+                    <h2 class="text-3xl font-heading font-bold text-slate-900 mt-2">Ringkasan Keahlian</h2>
+                    <p class="text-slate-500 mt-2">Kompetensi teknis & dasar informatika yang dikuasai selama pembelajaran sekolah.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                    <!-- HTML5 -->
+                    <div class="bg-white p-6 rounded-2xl border-2 border-pink-100 shadow-sm hover:border-pink-300 hover:shadow-md transition text-center group">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-html5"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-slate-800 text-lg mb-1">HTML5</h3>
+                        <p class="text-slate-500 text-xs">Struktur & Semantik Web</p>
+                    </div>
+
+                    <!-- CSS3 -->
+                    <div class="bg-white p-6 rounded-2xl border-2 border-pink-100 shadow-sm hover:border-pink-300 hover:shadow-md transition text-center group">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-css3-alt"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-slate-800 text-lg mb-1">CSS3</h3>
+                        <p class="text-slate-500 text-xs">Desain Responsif & Styling</p>
+                    </div>
+
+                    <!-- Jaringan Dasar -->
+                    <div class="bg-white p-6 rounded-2xl border-2 border-pink-100 shadow-sm hover:border-pink-300 hover:shadow-md transition text-center group">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-slate-800 text-lg mb-1">Jaringan Dasar</h3>
+                        <p class="text-slate-500 text-xs">IP Address & Topologi LAN</p>
+                    </div>
+
+                    <!-- Problem Solving -->
+                    <div class="bg-white p-6 rounded-2xl border-2 border-pink-100 shadow-sm hover:border-pink-300 hover:shadow-md transition text-center group">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-slate-800 text-lg mb-1">Problem Solving</h3>
+                        <p class="text-slate-500 text-xs">Logika & Algoritma Pemrograman</p>
+                    </div>
+
+                    <!-- Pemrograman Dasar -->
+                    <div class="bg-white p-6 rounded-2xl border-2 border-pink-100 shadow-sm hover:border-pink-300 hover:shadow-md transition text-center group">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-pink-100 text-pink-700 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-slate-800 text-lg mb-1">Pemrograman Dasar</h3>
+                        <p class="text-slate-500 text-xs">C / C++ & JavaScript</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. HALAMAN TENTANG SAYA (pages/tentang.html) -->
+        <section id="page-tentang" class="page-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="mb-10 text-center md:text-left">
+                    <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-xs font-bold">pages/tentang.html</span>
+                    <h1 class="text-3xl font-heading font-extrabold text-slate-900 mt-2">👤 Tentang Saya</h1>
+                    <p class="text-slate-500 mt-1">Biodata lengkap, riwayat akademik, serta galeri dokumentasi aktivitas praktikum di laboratorium.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+                    <!-- Biodata Table Card -->
+                    <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border-2 border-pink-200 shadow-sm">
+                        <h2 class="text-xl font-heading font-bold text-slate-900 mb-6 flex items-center gap-2 pb-3 border-b border-pink-100">
+                            <i class="fa-solid fa-address-card text-pink-500"></i> Biodata Lengkap
+                        </h2>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm text-slate-600">
+                                <tbody class="divide-y divide-pink-50">
+                                    <tr>
+                                        <td class="py-3.5 font-bold text-slate-800 w-1/3">Nama Lengkap</td>
+                                        <td class="py-3.5 font-semibold text-pink-700">Shinta Kumala Rahmadanthi</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3.5 font-bold text-slate-800">Status Akademik</td>
+                                        <td class="py-3.5"><span class="bg-pink-100 text-pink-800 text-xs px-3 py-1 rounded-full font-bold">Siswa Kelas XII RPL</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3.5 font-bold text-slate-800">Peminatan / Jurusan</td>
+                                        <td class="py-3.5">Rekayasa Perangkat Lunak / Informatika</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3.5 font-bold text-slate-800">Riwayat Pendidikan</td>
+                                        <td class="py-3.5">
+                                            <ul class="list-disc list-inside space-y-1">
+                                                <li>SMA / SMK Informatika (2023 - Sekarang)</li>
+                                                <li>SMP Negeri (2020 - 2023)</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3.5 font-bold text-slate-800">Minat Studi Masa Depan</td>
+                                        <td class="py-3.5">Teknik Informatika, Software Engineering, & Internet of Things (IoT)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Vision & Motivation Card -->
+                    <div class="lg:col-span-5 bg-polkadot-dark text-white p-6 sm:p-8 rounded-3xl shadow-md flex flex-col justify-between border-2 border-pink-300">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-white/20 text-white flex items-center justify-center text-2xl mb-4">
+                                🌸
+                            </div>
+                            <h3 class="text-2xl font-heading font-bold mb-3">Visi Belajar</h3>
+                            <p class="text-pink-100 text-sm leading-relaxed mb-4">
+                                "Berkomitmen menjadi siswa yang terampil dalam pemrograman web dan sistem tertanam (IoT), serta bersemangat menciptakan solusi teknologi yang bermanfaat."
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-pink-400/40 flex items-center justify-around">
+                            <div class="text-center">
+                                <span class="block text-2xl font-heading font-extrabold text-white">100%</span>
+                                <span class="text-xs text-pink-200">Semangat Belajar</span>
+                            </div>
+                            <div class="h-8 w-px bg-pink-400/50"></div>
+                            <div class="text-center">
+                                <span class="block text-2xl font-heading font-extrabold text-pink-200">Kelas XII</span>
+                                <span class="text-xs text-pink-200">Tingkat Akhir</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Galeri Aktivitas Belajar / Lab Practical Photo Grid -->
+                <div>
+                    <h2 class="text-xl font-heading font-bold text-slate-900 mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-camera-retro text-pink-500"></i> Galeri Aktivitas Belajar & Praktikum Lab
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Activity Photo 1 -->
+                        <div class="bg-white rounded-2xl overflow-hidden border-2 border-pink-100 shadow-sm hover:shadow-md transition group">
+                            <div class="h-48 bg-pink-50 overflow-hidden relative">
+                                <img src="baik.jpg" alt="Praktikum Coding di Lab" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-heading font-bold text-slate-800 text-sm mb-1">Praktikum Lab Komputer</h3>
+                                <p class="text-xs text-slate-500">Coding web dan pembuatan antarmuka di laboratorium.</p>
+                            </div>
+                        </div>
+
+                        <!-- Activity Photo 2 -->
+                        <div class="bg-white rounded-2xl overflow-hidden border-2 border-pink-100 shadow-sm hover:shadow-md transition group">
+                            <div class="h-48 bg-pink-50 overflow-hidden relative">
+                                <img src="cantik.jpg" alt="Simulasi Jaringan" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-heading font-bold text-slate-800 text-sm mb-1">Simulasi Jaringan LAN</h3>
+                                <p class="text-xs text-slate-500">Praktik perancangan topologi star menggunakan Cisco Packet Tracer.</p>
+                            </div>
+                        </div>
+
+                        <!-- Activity Photo 3 -->
+                        <div class="bg-white rounded-2xl overflow-hidden border-2 border-pink-100 shadow-sm hover:shadow-md transition group">
+                            <div class="h-48 bg-pink-50 overflow-hidden relative">
+                                < src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=500" alt="Perakitan Hardware IoT" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-heading font-bold text-slate-800 text-sm mb-1">Perakitan Sensor & IoT</h3>
+                                <p class="text-xs text-slate-500">Eksperimen merangkai sensor suhu DHT11 dan board mikrokontroler.</p>
+                            </div>
+                        </div>
+
+                        <!-- Activity Photo 4 -->
+                        <div class="bg-white rounded-2xl overflow-hidden border-2 border-pink-100 shadow-sm hover:shadow-md transition group">
+                            <div class="h-48 bg-pink-50 overflow-hidden relative">
+                                <img src="cute.png" alt="Diskusi Kelompok" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-heading font-bold text-slate-800 text-sm mb-1">Diskusi Proyek Kelompok</h3>
+                                <p class="text-xs text-slate-500">Kolaborasi bersama teman sekelas mengerjakan tugas informatika.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. HALAMAN JARINGAN KOMPUTER (pages/jaringan.html) -->
+        <section id="page-jaringan" class="page-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="mb-10">
+                    <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold">pages/jaringan.html</span>
+                    <h1 class="text-3xl font-heading font-extrabold text-slate-900 mt-2">🌐 Modul Jaringan Komputer</h1>
+                    <p class="text-slate-500 mt-1">Modul portofolio berkembang untuk kelas XII (Dokumentasi IP Address, Packet Tracer & Protokol).</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Draft Card 1: IP Address -->
+                    <div class="bg-white rounded-3xl border-2 border-pink-200 shadow-sm p-6 flex flex-col justify-between hover:border-pink-400 transition">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center font-bold">
+                                    01
+                                </div>
+                                <span class="text-xs font-bold text-pink-700 bg-pink-50 px-3 py-1 rounded-full border border-pink-200">Konfigurasi IP</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-slate-800 text-lg mb-2">Dokumentasi IP Address & Subnetting</h3>
+                            <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                                Penghitungan IP static & DHCP kelas C, alokasi subnet mask, serta tes konektivitas (ping) di laboratorium sekolah.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-pink-50 flex justify-between items-center text-xs text-slate-400">
+                            <span><i class="fa-regular fa-calendar"></i> Semester 1</span>
+                            <span class="font-bold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-lg">Draft / Siap Diisi</span>
+                        </div>
+                    </div>
+
+                    <!-- Draft Card 2: Cisco Packet Tracer -->
+                    <div class="bg-white rounded-3xl border-2 border-pink-200 shadow-sm p-6 flex flex-col justify-between hover:border-pink-400 transition">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold">
+                                    02
+                                </div>
+                                <span class="text-xs font-bold text-purple-700 bg-purple-50 px-3 py-1 rounded-full border border-purple-200">Cisco Packet Tracer</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-slate-800 text-lg mb-2">Simulasi Topologi Jaringan LAN & WLAN</h3>
+                            <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                                Skema rancangan topologi Star dan Star-Mesh menggunakan Router, Switch, dan Wireless Access Point.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-pink-50 flex justify-between items-center text-xs text-slate-400">
+                            <span><i class="fa-regular fa-calendar"></i> Semester 1</span>
+                            <span class="font-bold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-lg">Draft / Siap Diisi</span>
+                        </div>
+                    </div>
+
+                    <!-- Draft Card 3: Protocol Analysis -->
+                    <div class="bg-white rounded-3xl border-2 border-pink-200 shadow-sm p-6 flex flex-col justify-between hover:border-pink-400 transition">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center font-bold">
+                                    03
+                                </div>
+                                <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-200">Analisis Protokol</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-slate-800 text-lg mb-2">Analisis Protokol TCP/IP & HTTP</h3>
+                            <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                                Pengamatan transmisi paket data, tiga langkah berjabat tangan (three-way handshake), dan pemahaman OSI Layer.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-pink-50 flex justify-between items-center text-xs text-slate-400">
+                            <span><i class="fa-regular fa-calendar"></i> Semester 2</span>
+                            <span class="font-bold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-lg">Draft / Siap Diisi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. HALAMAN IOT & ARDUINO (pages/iot-arduino.html) -->
+        <section id="page-iot" class="page-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="mb-10">
+                    <span class="px-3 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-bold">pages/iot-arduino.html</span>
+                    <h1 class="text-3xl font-heading font-extrabold text-slate-900 mt-2">🤖 Modul Internet of Things / Arduino</h1>
+                    <p class="text-slate-500 mt-1">Dokumentasi skematik sirkuit (Wokwi/Fritzing), program C/C++, dan rakitan sensor & aktuator.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Draft Card 1: Circuit Schematics -->
+                    <div class="bg-white rounded-3xl border-2 border-pink-200 shadow-sm p-6 flex flex-col justify-between hover:border-pink-400 transition">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center font-bold">
+                                    01
+                                </div>
+                                <span class="text-xs font-bold text-pink-700 bg-pink-50 px-3 py-1 rounded-full border border-pink-200">Wokwi / Fritzing</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-slate-800 text-lg mb-2">Skematik Sensor Suhu DHT11 & LCD</h3>
+                            <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                                Diagram skematik menghubungkan sensor suhu DHT11 dan layar LCD 16x2 I2C ke board Arduino UNO.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-pink-50 flex justify-between items-center text-xs text-slate-400">
+                            <span><i class="fa-regular fa-calendar"></i> Semester 1</span>
+                            <span class="font-bold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-lg">Draft / Siap Diisi</span>
+                        </div>
+                    </div>
+
+                    <!-- Draft Card 2: Microcontroller Code -->
+                    <div class="bg-white rounded-3xl border-2 border-pink-200 shadow-sm p-6 flex flex-col justify-between hover:border-pink-400 transition">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold">
+                                    02
+                                </div>
+                                <span class="text-xs font-bold text-rose-700 bg-rose-50 px-3 py-1 rounded-full border border-rose-200">C/C++ Microprocessor</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-slate-800 text-lg mb-2">Program Kontrol Motor Servo & Aktuator</h3>
+                            <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                                Baris program C++ mikrokontroler untuk menggerakkan Servo SG90 berdasarkan deteksi jarak sensor Ultrasonik HC-SR04.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-pink-50 flex justify-between items-center text-xs text-slate-400">
+                            <span><i class="fa-regular fa-calendar"></i> Semester 1</span>
+                            <span class="font-bold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-lg">Draft / Siap Diisi</span>
+                        </div>
+                    </div>
+
+                    <!-- Draft Card 3: ESP8266 Assembly -->
+                    <div class="bg-white rounded-3xl border-2 border-pink-200 shadow-sm p-6 flex flex-col justify-between hover:border-pink-400 transition">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                                    03
+                                </div>
+                                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">Hardware Test</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-slate-800 text-lg mb-2">Uji Rakitan Otomasi ESP8266 Wi-Fi</h3>
+                            <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                                Foto & dokumentasi rakitan saklar pintar IoT terhubung Wi-Fi yang dikendalikan melalui aplikasi smartphone.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-pink-50 flex justify-between items-center text-xs text-slate-400">
+                            <span><i class="fa-regular fa-calendar"></i> Semester 2</span>
+                            <span class="font-bold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-lg">Draft / Siap Diisi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. HALAMAN GALERI PROYEK (pages/karya-proyek.html) -->
+        <section id="page-karya" class="page-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="mb-10">
+                    <span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-bold">pages/karya-proyek.html</span>
+                    <h1 class="text-3xl font-heading font-extrabold text-slate-900 mt-2">💡 Galeri Proyek & Tugas Sekolah</h1>
+                    <p class="text-slate-500 mt-1">Kumpulan screenshot, deskripsi ringkas, dan tautan repositori/demo proyek yang pernah dibuat.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Card 1: Web Design -->
+                    <div class="bg-white rounded-3xl overflow-hidden border-2 border-pink-200 shadow-sm hover:shadow-lg transition flex flex-col">
+                        <div class="h-48 bg-pink-100 overflow-hidden relative">
+                            <img src="straww.jpg" alt="Website Profil" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">Web Design</span>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-heading font-bold text-slate-900 text-lg mb-2">Website Landing Page Responsif</h3>
+                                <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                                    Desain dan implementasi tata letak halaman web responsif menggunakan HTML5 & Tailwind CSS bertema modern.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-pink-50 flex items-center justify-between">
+                                <a href="https://github.com" target="_blank" class="text-xs font-bold text-slate-700 hover:text-pink-600 flex items-center gap-1.5">
+                                    <i class="fa-brands fa-github text-base"></i> Repositori
+                                </a>
+                                <button onclick="openModal('Demo Landing Page Web', 'Ini adalah simulasi proyek landing page responsif buatan Shinta Kumala Rahmadanthi dengan struktur HTML5 dan Tailwind CSS.')" class="text-xs font-bold text-pink-600 hover:text-pink-700 flex items-center gap-1">
+                                    Lihat Demo <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2: Programming logic -->
+                    <div class="bg-white rounded-3xl overflow-hidden border-2 border-pink-200 shadow-sm hover:shadow-lg transition flex flex-col">
+                        <div class="h-48 bg-pink-100 overflow-hidden relative">
+                            <img src="straww.jpg" alt="Kalkulator Nilai" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">Pemrograman</span>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-heading font-bold text-slate-900 text-lg mb-2">Program Kalkulator Nilai Siswa</h3>
+                                <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                                    Aplikasi berbasis logika algoritma untuk menghitung rata-rata nilai siswa dan penentuan predikat kelulusan.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-pink-50 flex items-center justify-between">
+                                <a href="https://github.com" target="_blank" class="text-xs font-bold text-slate-700 hover:text-pink-600 flex items-center gap-1.5">
+                                    <i class="fa-brands fa-github text-base"></i> Repositori
+                                </a>
+                                <button onclick="openModal('Demo Kalkulator Nilai', 'Program perhitungan algoritma nilai siswa berbasis JS/C++ dengan validasi input dan predikat otomatis.')" class="text-xs font-bold text-pink-600 hover:text-pink-700 flex items-center gap-1">
+                                    Lihat Demo <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3: Network design -->
+                    <div class="bg-white rounded-3xl overflow-hidden border-2 border-pink-200 shadow-sm hover:shadow-lg transition flex flex-col">
+                        <div class="h-48 bg-pink-100 overflow-hidden relative">
+                            <img src="imut.jpg" alt="Topologi Jaringan" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">Networking</span>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-heading font-bold text-slate-900 text-lg mb-2">Rancangan Jaringan Gedung Sekolah</h3>
+                                <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                                    Proyek kolaborasi merancang skema jaringan komputer antar-ruangan menggunakan router & switch terkonfigurasi.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-pink-50 flex items-center justify-between">
+                                <a href="https://github.com" target="_blank" class="text-xs font-bold text-slate-700 hover:text-pink-600 flex items-center gap-1.5">
+                                    <i class="fa-brands fa-github text-base"></i> Repositori
+                                </a>
+                                <button onclick="openModal('File Skema Jaringan', 'Berkas rancangan Cisco Packet Tracer gedung lab sekolah dengan alokasi VLAN dan IP Address static.')" class="text-xs font-bold text-pink-600 hover:text-pink-700 flex items-center gap-1">
+                                    Lihat File <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. HALAMAN KONTAK (pages/kontak.html) -->
+        <section id="page-kontak" class="page-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="mb-10 text-center max-w-2xl mx-auto">
+                    <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-xs font-bold">pages/kontak.html</span>
+                    <h1 class="text-3xl font-heading font-extrabold text-slate-900 mt-2">📬 Formulir Kontak</h1>
+                    <p class="text-slate-500 mt-2">Kirimkan pesan, pertanyaan, atau masukan melalui formulir di bawah ini.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start max-w-5xl mx-auto">
+                    <!-- Contact Information Sidebar -->
+                    <div class="lg:col-span-5 bg-white p-6 sm:p-8 rounded-3xl border-2 border-pink-200 shadow-sm space-y-6">
+                        <h2 class="text-xl font-heading font-bold text-slate-900 border-b border-pink-100 pb-4">Informasi Kontak</h2>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center shrink-0 text-xl font-bold">
+                                ✉️
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-bold text-pink-500 uppercase tracking-wider">Email Sekolah / Pribadi</h3>
+                                <p class="font-bold text-slate-800 text-sm mt-0.5">shinta.rahmadanthi@sekolah.sch.id</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center shrink-0 text-xl font-bold">
+                                📍
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-bold text-pink-500 uppercase tracking-wider">Lokasi Kota</h3>
+                                <p class="font-bold text-slate-800 text-sm mt-0.5">Mojokerto / Jawa Timur, Indonesia</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center shrink-0 text-xl font-bold">
+                                🏫
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-bold text-pink-500 uppercase tracking-wider">Status Pembelajaran</h3>
+                                <p class="font-bold text-slate-800 text-sm mt-0.5">Aktif (Siswa Kelas XII RPL)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Contact Form -->
+                    <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border-2 border-pink-200 shadow-sm">
+                        <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-5">
+                            <div>
+                                <label for="nama" class="block text-sm font-bold text-slate-700 mb-1">Nama Pengirim</label>
+                                <input type="text" id="nama" required placeholder="Masukkan nama lengkap Anda" class="w-full px-4 py-3.5 rounded-2xl border-2 border-pink-100 focus:outline-none focus:border-pink-500 transition text-sm">
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-bold text-slate-700 mb-1">Alamat Email</label>
+                                <input type="email" id="email" required placeholder="nama@email.com" class="w-full px-4 py-3.5 rounded-2xl border-2 border-pink-100 focus:outline-none focus:border-pink-500 transition text-sm">
+                            </div>
+
+                            <div>
+                                <label for="kategori" class="block text-sm font-bold text-slate-700 mb-1">Kategori Pesan</label>
+                                <select id="kategori" required class="w-full px-4 py-3.5 rounded-2xl border-2 border-pink-100 focus:outline-none focus:border-pink-500 transition text-sm bg-white">
+                                    <option value="" disabled selected>Pilih Kategori Pesan...</option>
+                                    <option value="Pertanyaan">Pertanyaan</option>
+                                    <option value="Kolaborasi">Kolaborasi Proyek</option>
+                                    <option value="Saran">Saran & Masukan</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="pesan" class="block text-sm font-bold text-slate-700 mb-1">Pesan Teks</label>
+                                <textarea id="pesan" rows="4" required placeholder="Tuliskan pesan Anda di sini..." class="w-full px-4 py-3.5 rounded-2xl border-2 border-pink-100 focus:outline-none focus:border-pink-500 transition text-sm resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold shadow-lg shadow-pink-500/25 transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
+                            </button>
+                        </form>
+                        
+                        <!-- Form Success Alert Notification -->
+                        <div id="formAlert" class="hidden mt-4 p-4 rounded-2xl bg-pink-50 border-2 border-pink-300 text-pink-800 text-sm font-bold flex items-center gap-3">
+                            <i class="fa-solid fa-circle-check text-pink-600 text-xl"></i>
+                            <span>Terima kasih! Pesan Anda telah berhasil dikirim.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER MODULAR -->
+    <footer class="bg-polkadot-dark text-white border-t-2 border-pink-300 mt-16 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-center md:text-left">
+                    <p class="text-sm font-bold tracking-wide">
+                        &copy; 2026 Shinta Kumala Rahmadanthi. Hak Cipta Dilindungi.
+                    </p>
+                    <p class="text-xs text-pink-200 mt-0.5">Siswa Kelas XII - Peminatan Rekayasa Perangkat Lunak / Informatika</p>
+                </div>
+
+                <!-- Social Media Accounts -->
+                <div class="flex items-center gap-4">
+                    <a href="https://github.com" target="_blank" aria-label="GitHub Account" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white hover:text-pink-700 flex items-center justify-center transition">
+                        <i class="fa-brands fa-github text-lg"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn Account" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white hover:text-pink-700 flex items-center justify-center transition">
+                        <i class="fa-brands fa-linkedin-in text-lg"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram Account" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white hover:text-pink-700 flex items-center justify-center transition">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Modal Preview (Replaces alert) -->
+    <div id="demoModal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 border-2 border-pink-300 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-pink-100 pb-3">
+                <h3 id="modalTitle" class="font-heading font-bold text-slate-900 text-lg">Judul Proyek</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-pink-600 transition text-xl font-bold">&times;</button>
+            </div>
+            <p id="modalBody" class="text-sm text-slate-600 leading-relaxed"></p>
+            <div class="pt-2 flex justify-end">
+                <button onclick="closeModal()" class="px-5 py-2.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm transition">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTERACTIVE ROUTING & LOGIC SCRIPT -->
+    <script>
+        // SPA Client-side router logic
+        function navigateTo(pageId) {
+            // Hide all section elements
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // Show active page section
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.add('active');
+            }
+
+            // Update header menu highlighting
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('text-pink-600', 'bg-pink-100', 'font-extrabold');
+                btn.classList.add('text-slate-600');
+            });
+            const activeBtn = document.getElementById('nav-' + pageId);
+            if (activeBtn) {
+                activeBtn.classList.add('text-pink-600', 'bg-pink-100', 'font-extrabold');
+                activeBtn.classList.remove('text-slate-600');
+            }
+
+            // Scroll to top of window
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle mobile dropdown menu visibility
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Contact form submission event handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const alertBox = document.getElementById('formAlert');
+            const form = document.getElementById('contactForm');
+            alertBox.classList.remove('hidden');
+            form.reset();
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Modal dialog control functions
+        function openModal(title, text) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerText = text;
+            document.getElementById('demoModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('demoModal').classList.add('hidden');
+        }
+
+        // Initialize default view to Beranda on page load
+        window.onload = function() {
+            navigateTo('beranda');
+        };
+    </script>
+</body>
+</html>
